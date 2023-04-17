@@ -1,0 +1,13 @@
+.headerWrappe {
+    height: 5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user {
+    width: 10vw;
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+}

@@ -1,0 +1,21 @@
+.productWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.product {
+    width: 90%;
+    height: 100%;
+}
+
+.commonDesc {
+    display: flex;
+    flex-direction: row;
+}
+
+.image{
+    width: 30%;
+    height: max-content;
+}
