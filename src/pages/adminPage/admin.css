@@ -41,6 +41,10 @@
     text-shadow: 0 1px 0 #333131;
     font-size: 17px;
   }
+
+  #label1 .input1 {
+    width: 30%;
+  }
   
   .pesontedan-content {
     max-height: 0;
@@ -88,4 +92,10 @@
   }
   .pesontedan input[type=radio]:checked + label::after {
     transform: rotateX(180deg);
+  }
+
+  .btn1 {
+    height: 14px;
+    font-size: 12px;
+    margin-left: 5px;
   }

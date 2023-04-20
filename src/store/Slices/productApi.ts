@@ -1,37 +1,41 @@
-import { StringDecoder } from 'string_decoder';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IProducts } from '../../types/types';
-import { idText } from 'typescript';
 
 
-const baseUrl = 'http://localhost:80/products'
+const baseUrl = 'http://localhost:80/'
 
 export const productApi = createApi({
     reducerPath: 'productsApi',
-    baseQuery: fetchBaseQuery({baseUrl}),
+    baseQuery: fetchBaseQuery({ baseUrl }),
     tagTypes: ['products', 'manufacturer', 'category'],
     endpoints: (build) => ({
         fetchAllProducts: build.query<IProducts[], void>({
             query: () => ({
-                url: '/all'
+                url: 'products/all'
             }),
             providesTags: result => ['products']
         }),
         getProductById: build.query<any, string | undefined>({
             query: (id) => ({
-                url: `/one?id=${id}`
+                url: `products/one?id=${id}`
             }),
             providesTags: result => ['products']
         }),
+        getProductId: build.mutation<any, string | undefined>({
+            query: (id) => ({
+                url: `products/one?id=${id}`
+            }),
+            invalidatesTags: ['products']
+        }),
         getProductByName: build.query<any[], string | undefined>({
             query: (username) => ({
-                url: `/name?username=${username}`
+                url: `products/name?username=${username}`
             }),
             providesTags: result => ['products']
         }),
         createProduct: build.mutation<any, any>({
             query: (product) => ({
-                url: '/create',
+                url: 'products/create',
                 method: 'POST',
                 body: product
             }),
@@ -39,54 +43,56 @@ export const productApi = createApi({
         }),
         updateProduct: build.mutation<any, any>({
             query: (product) => ({
-                url: `/update`,
-                method: 'PUT',
+                url: `products/update`,
+                method: 'POST',
                 body: product
             }),
             invalidatesTags: ['products']
         }),
         deleteProduct: build.mutation<any, string | undefined>({
-            query: (id) => ({
-                url: `/delete?id=${id}`,
-                method: 'DELETE',   
+            query: (name) => ({
+                url: `products/delete?name=${name}`,
+                method: 'DELETE',
             }),
             invalidatesTags: ['products']
         }),
         fetchManufacturers: build.query<any, void>({
             query: () => ({
-                url: `/delete/manufacturer/all`
+                url: `products/manufacturer/all`
             }),
             providesTags: result => ['manufacturer']
         }),
         addManufacturer: build.mutation<any, string>({
             query: (name) => ({
-                url: '/delete/manufacturer/add',
-                body: name
+                url: 'products/manufacturer/add',
+                method: 'POST',
+                body: { name }
             }),
             invalidatesTags: ['manufacturer']
         }),
-        deleteManufacturer: build.mutation<any, number>({
+        deleteManufacturer: build.mutation<any, any>({
             query: (id) => ({
-                url: `/delete/manufacturer/delete${id}`
+                url: `products/manufacturer/delete?id=${id}`
             }),
             invalidatesTags: ['manufacturer']
         }),
         fetchCategory: build.query<any, void>({
             query: () => ({
-                url: `/delete/category/all`
+                url: `products/category/all`
             }),
             providesTags: result => ['category']
         }),
         addCategory: build.mutation<any, string>({
             query: (name) => ({
-                url: '/delete/category/add',
-                body: name
+                url: 'products/category/add',
+                method: 'POST',
+                body: { name }
             }),
             invalidatesTags: ['category']
         }),
         deleteCategory: build.mutation<any, number>({
             query: (id) => ({
-                url: `/delete/category/delete${id}`
+                url: `products/category/delete${id}`
             }),
             invalidatesTags: ['category']
         }),
@@ -96,17 +102,18 @@ export const productApi = createApi({
 export const {
     useCreateProductMutation,
     useDeleteProductMutation,
-    useFetchAllProductsQuery, 
-    useGetProductByIdQuery, 
-    useGetProductByNameQuery, 
-    useUpdateProductMutation, 
+    useFetchAllProductsQuery,
+    useGetProductByIdQuery,
+    useGetProductByNameQuery,
+    useUpdateProductMutation,
     useAddManufacturerMutation,
     useDeleteManufacturerMutation,
     useLazyFetchAllProductsQuery,
     useFetchManufacturersQuery,
     useAddCategoryMutation,
     useDeleteCategoryMutation,
-    useFetchCategoryQuery
+    useFetchCategoryQuery,
+    useGetProductIdMutation
 } = productApi
 
 

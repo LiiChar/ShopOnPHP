@@ -3,17 +3,20 @@ import { IProducts } from '../../types/types'
 import './producte.css'
 import { useAddBusketMutation } from '../../store/Slices/busketApi'
 import { useNavigate } from 'react-router-dom'
+import { useShowAlert } from '../../hooks/useShowAlert'
 
 interface Props {
     product: IProducts
 }
 export const Product: React.FC<Props> = ({ product }) => {
     const user_id = Number(sessionStorage.getItem('user_id'));
-    const [addBusket, { data, error: addError }] = useAddBusketMutation()
+    const [addBusket] = useAddBusketMutation()
     const navigate = useNavigate()
 
-    const addHandleBusket = async () => {
-        const dat: string | any = await addBusket({ user_id: user_id, product_id: product.id })
+    const alert = useShowAlert()
+
+    const addHandleBusket = () => {
+        addBusket({ user_id: user_id, product_id: product.id }).then((data) => alert(data))
     }
 
     return (
@@ -37,8 +40,8 @@ export const Product: React.FC<Props> = ({ product }) => {
 
                     <a className="cart" href="#">
                         <span className="price">{product.sale}</span>
-                        <span className="add-to-cart">
-                            <span onClick={addHandleBusket} className="txt">Add in cart</span>
+                        <span onClick={addHandleBusket} className="add-to-cart">
+                            <span className="txt">Add in cart</span>
                         </span>
                     </a>
                 </div>

@@ -1,0 +1,18 @@
+ul {
+    z-index: 10000;
+    margin-top: -5px;
+    margin-left: 5px;
+    display: none;
+    position: relative;
+    color: black;
+    background-color: white;
+    margin-top: 5px;
+    width: 80%;
+    height: 32px;
+    overflow: auto;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}

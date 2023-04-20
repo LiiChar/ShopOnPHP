@@ -1,0 +1,35 @@
+.userWrapperer {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: -50px;
+}
+
+.actionser {
+    display: flex;  
+    justify-content: space-around;
+}
+
+.usernameer {
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+button {
+    background: #92b8d6;
+    border: none;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}

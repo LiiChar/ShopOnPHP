@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './header.css';
 import { useGetUserByIdQuery } from '../../store/Slices/userApi';
 
-export const Header = () => {
+export const Header = React.memo(function Header() {
     const id = Number(sessionStorage.getItem('user_id'));
     const name = sessionStorage.getItem('user');
     const {data:user} = useGetUserByIdQuery(id);
@@ -12,9 +12,13 @@ export const Header = () => {
             <div>
                 <Link to={'/'}>Oven</Link>
             </div>
-            {user?.ROLE === 'ADMIN' && 
+            {user?.ROLE === 'ADMIN'?
                 <div>
                      <Link to={`/admin`}>Панель администратора</Link>
+                </div>
+                :
+                <div>
+                    {!name && <Link to={`/login`}>Войти</Link>}
                 </div>
             }
             <div className='user'>
@@ -27,4 +31,4 @@ export const Header = () => {
             </div>
         </div>
     )
-}
+})

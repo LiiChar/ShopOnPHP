@@ -14,7 +14,7 @@ export const busketApi = createApi({
     endpoints: (build) => ({
         fetchBusket: build.query<any[], number>({
             query: (id) => ({
-                url: `/user?user_id=${id}`
+                url: `/user?id=${id}`
             }),
             providesTags: result => ['Busket']
         }),
@@ -27,10 +27,9 @@ export const busketApi = createApi({
             invalidatesTags: ['Busket']
         }),
         deleteBusket: build.mutation<any, AddBusk>({
-            query: (busk) => ({
-                url: '/delete',
+            query: (id) => ({
+                url: `/delete?id=${id}`,
                 method: 'PUT',
-                body: busk
             }),
             invalidatesTags: ['Busket']
         }),

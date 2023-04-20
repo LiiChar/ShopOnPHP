@@ -8,7 +8,6 @@ import { Admin } from './pages/adminPage/Admin';
 import { User } from './pages/userPage/User';
 import { Product } from './pages/productPage/Product';
 import { Busket } from './pages/busketPage/Busket';
-import { useGetUserByIdQuery } from './store/Slices/userApi';
 
 function Routes() {
   return (
@@ -22,6 +21,7 @@ function Routes() {
       <Route path='/busket/:id' element={<Busket />} />
     </Rts>
   )
+
 }
 
 export default Routes;

@@ -1,11 +1,21 @@
 import React from 'react'
 import './admin.css'
 import { AddProduct } from '../../components/adminActions/AddProduct'
-import { AddManufacturer } from '../../components/adminActions/addManufacturer'
-import { UpdateProduct } from '../../components/adminActions/updateProduct'
 import { AddCategory } from '../../components/adminActions/AddCategory'
+import { DeleteProduct } from '../../components/adminActions/DeleteProduct'
+import { ChangeRole } from '../../components/adminActions/ChangeRole'
+import { DeleteUser } from '../../components/adminActions/DeleteUser'
+import { AddManufacturer } from '../../components/adminActions/AddManufacturer'
+import { UpdateProduct } from '../../components/adminActions/UpdateProduct'
+import { useFetchAllUsersQuery } from '../../store/Slices/userApi'
+import { useFetchAllProductsQuery, useFetchCategoryQuery, useFetchManufacturersQuery } from '../../store/Slices/productApi'
 
 export const Admin = () => {
+  const { data: users } = useFetchAllUsersQuery()
+  const {data:products} = useFetchAllProductsQuery()
+  const {data:manufacturer} = useFetchManufacturersQuery()
+  const {data:categories} = useFetchCategoryQuery()
+
   return (
     <div  className="navigaonusing">
       <div className="gaonutosal">
@@ -13,49 +23,49 @@ export const Admin = () => {
           <input id="pesontedan-one" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-one">Добавить продукт</label>
           <div className="pesontedan-content">
-            <AddProduct/>
+            <AddProduct manufacturer={manufacturer} categories={categories}/>
           </div>
         </div>
         <div key={2} className="pesontedan">
           <input id="pesontedan-two" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-two">Изменить продукт</label>
           <div className="pesontedan-content">
-            <UpdateProduct/>
+            <UpdateProduct products={products} manufacturer={manufacturer} categories={categories}/>
           </div>
         </div>
         <div key={3} className="pesontedan">
           <input id="pesontedan-three" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-three">Добавить производителя</label>
           <div className="pesontedan-content">
-            <AddManufacturer/>
+           {manufacturer && <AddManufacturer manufacturer={manufacturer}/>}
           </div>
         </div>
         <div key={4} className="pesontedan">
           <input id="pesontedan-four" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-four">Добавить категорию</label>
           <div className="pesontedan-content">
-            <AddCategory/>
+            {categories && <AddCategory categories={categories}/>}
           </div>
         </div>
         <div key={5} className="pesontedan">
           <input id="pesontedan-five" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-five">Удалить продукт</label>
           <div className="pesontedan-content">
-            <p>Третье описание по материалу</p>
+            <DeleteProduct products={products}/>
           </div>
         </div>
         <div key={6} className="pesontedan">
           <input id="pesontedan-six" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-six">Изменить роль пользователя</label>
           <div className="pesontedan-content">
-            <p>Третье описание по материалу</p>
+            <ChangeRole users={users}/>
           </div>
         </div>
         <div key={7} className="pesontedan">
           <input id="pesontedan-seven" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-seven">Удалить пользователя</label>
           <div className="pesontedan-content">
-            <p>Третье описание по материалу</p>
+            <DeleteUser users={users}/>
           </div>
         </div>
 

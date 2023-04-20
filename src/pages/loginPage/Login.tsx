@@ -13,11 +13,11 @@ interface UserInput {
 }
 
 export const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<UserInput>()
+  const { register, handleSubmit} = useForm<UserInput>()
   const [error, setError] = React.useState<string>();
   const navigate = useNavigate();
 
-  const [login, { data: user, status }] = useLoginUserMutation();
+  const [login] = useLoginUserMutation();
 
   React.useEffect(() => {
     if (sessionStorage.getItem('user')) {

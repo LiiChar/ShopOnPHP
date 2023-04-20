@@ -1,0 +1,21 @@
+.updateWrapper {
+    position: absolute;
+    left: 6.5%;
+    bottom: 150px;
+    width: 27%;
+    background-color:  #92b8d6;
+}
+
+input {
+    width: 90%;
+}
+
+.input2 {
+    width: 50%;
+}
+
+.sendButton {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}

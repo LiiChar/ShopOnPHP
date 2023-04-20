@@ -1,6 +1,5 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AnyIfEmpty } from 'react-redux';
 
 interface IAddUser {
     username: string;
@@ -19,6 +18,7 @@ interface userReq {
     user: string
 }
 
+
 const baseUrl = 'http://localhost:80/'
 
 export const usersApi = createApi({
@@ -26,29 +26,15 @@ export const usersApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl}),
     tagTypes: ['Users'],
     endpoints: (build) => ({
+        fetchAllUsers: build.query<any, void>({
+            query: () => ({
+                url: `/users/all`
+            }),
+            providesTags: result => ['Users']
+        }),
         getUserById: build.query<any, any>({
             query: (id) => ({
                 url: `/users/one?id=${id}`
-            }),
-            providesTags: result => ['Users']
-        }),
-        getNameByToken: build.mutation<any, any>({
-            query: () => ({
-                url: '/auth/name',
-                method: 'POST',
-                headers: {authorization: JSON.parse(sessionStorage.getItem('token') || '')}
-            }),
-            invalidatesTags: ['Users']
-        }),
-        getNameByName: build.query<any, string>({
-            query: (username) => ({
-                url: `/users/name/${username}`,
-            }),
-            providesTags: result => ['Users']
-        }),
-        getImageByName: build.query<any, any>({
-            query: (username) => ({
-                url: `/users/image/${username}`,
             }),
             providesTags: result => ['Users']
         }),
@@ -60,6 +46,14 @@ export const usersApi = createApi({
             }),
             invalidatesTags: ['Users']  
         }),
+        changeUser: build.mutation<any, any>({
+            query: (data) => ({
+                url: `/users/change`,
+                method: 'POST',
+                body: data
+            }),
+            invalidatesTags: ['Users']
+        }),
         loginUser: build.mutation<any | userReq, LoginUser>({
             query: (user) => ({
                 url: '/auth/login',
@@ -67,8 +61,31 @@ export const usersApi = createApi({
                 body: user
             }),
             invalidatesTags: ['Users']
-        })
+        }),
+        deleteUser: build.mutation<any, any>({
+            query: (id) => ({
+                url: `/users/delete?id=${id}`,
+                method: 'POST',
+            }),
+            invalidatesTags: ['Users']
+        }),
+        changeRole: build.mutation<any, any>({
+            query: (data) => ({
+                url: `/users/role?name=${data.user}`,
+                method: 'POST',
+                body: data
+            }),
+            invalidatesTags: ['Users']
+        }),
     })
 })
 
-export const {useCreateUsersMutation, useLoginUserMutation, useGetNameByTokenMutation, useGetUserByIdQuery, useGetNameByNameQuery, useGetImageByNameQuery} = usersApi
+export const {
+    useCreateUsersMutation, 
+    useLoginUserMutation, 
+    useGetUserByIdQuery,
+    useDeleteUserMutation,
+    useFetchAllUsersQuery,
+    useChangeRoleMutation,
+    useChangeUserMutation
+} = usersApi

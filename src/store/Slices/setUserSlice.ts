@@ -1,40 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IInitialState {
-    user: {
-        name: string
-    },
-    jwtToken: string | undefined,
-    vision: boolean
+interface Alert {
+    id: string;
+    message: string;
 }
 
-interface IUser {
-    name: string | 'Bot'
+interface IInitialState {
+    user: Alert[]
 }
 
 const initialState: IInitialState = {
-    user: {
-        name: 'Bot'
-    },
-    jwtToken: '',
-    vision: false
+    user: []
 }
 
 export const userSlice = createSlice({
     name: 'setUser',
     initialState,
     reducers: {
-        setUser: (state: IInitialState, action: PayloadAction<IUser>): void => {
-            state.user = action.payload
+        setAlert: (state: IInitialState, action: PayloadAction<Alert>): void => {
+            state.user.push(action.payload)
         },
-        setVision: (state: IInitialState, action: PayloadAction<boolean>) => {
-            state.vision = action.payload
-        },
-        setJwtToken: (state: IInitialState, action: PayloadAction<string>) => {
-            state.jwtToken = action.payload
+        deleteAlert: (state: IInitialState, action: PayloadAction<string>): void => {
+            state.user = state.user.filter((alert) => alert.id !== action.payload);
         }
     }
 })
 
 export default userSlice.reducer
-export const {setUser, setVision, setJwtToken} = userSlice.actions
+export const {setAlert, deleteAlert} = userSlice.actions

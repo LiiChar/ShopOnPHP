@@ -2,6 +2,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    margin-top: 10px;
     justify-content: center;
 }
 
@@ -10,7 +11,52 @@
     height: 100%;
 }
 
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.otsiv {
+    margin-top: 10px;
+}
+
+.textar {
+    height: 50px;
+    width: 99%;
+    resize: none;
+}
+
+.mesOtsiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.commonInfo {
+    padding: 20px;
+    padding-top: 0px;
+}
+
+.commonInfo div {
+    margin-bottom: 10px;
+}
+
+.confirm {
+    height: 40px;
+    background: #92b8d6;
+    border: none;
+    width: 100%;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
 .commonDesc {
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
 }
@@ -18,4 +64,13 @@
 .image{
     width: 30%;
     height: max-content;
+}
+
+.description {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.description span {
+    font-weight: bold;
 }

@@ -12,11 +12,11 @@ interface UserInput {
 }
 
 export const Registration = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<UserInput>()
+  const { register, handleSubmit} = useForm<UserInput>()
   const [error, setError] = React.useState<string>();
   const navigate = useNavigate();
 
-  const [createUser, {data: user, status}] = useCreateUsersMutation();
+  const [createUser] = useCreateUsersMutation();
 
   const onSubmitHandler = async (value: UserInput) => {
     if (value.password !== value.repeatPassword) {

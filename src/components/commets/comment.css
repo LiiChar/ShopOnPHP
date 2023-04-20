@@ -1,0 +1,46 @@
+.rate {
+    margin: 5px 0 5px 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.date {
+    font-weight: none;
+    font-size: 12px;
+    color: rgb(180, 180, 180);
+}
+
+.commentMessage {
+    margin: 0 0px 5px 5px;
+}
+
+.comWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.deleteX {
+    height: 100%;
+    width: 3%;
+    align-self: center;
+    background: #92b8d6;
+}
+
+.deleteX div {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    height: 49px;
+}
+
+.text {
+    width: 97%;
+}

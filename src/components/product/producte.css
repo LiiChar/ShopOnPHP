@@ -58,10 +58,15 @@ body {
     vertical-align: middle;
 }
 
+
+
 .row {
     height: min-content;
     width: 30%;
     height: 40%;
+    max-width: 220px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .el-wrapper {
@@ -76,6 +81,16 @@ body {
 }
 
 .el-wrapper:hover .price {
+    left: 20px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #818181;
+}
+
+
+.el-wrapper:hover .p-name1 {
     left: 20px;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -281,9 +296,9 @@ body {
     top: 50%;
     left: 110%;
     -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    -ms-transform: translate(20%, -50%);
+    -o-transform: translate(20%, -50%);
+    transform: translate(20%, -50%);
 }
 
 .cart .add-to-cart .txt {

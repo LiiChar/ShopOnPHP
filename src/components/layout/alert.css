@@ -1,0 +1,16 @@
+.alert {
+    position: fixed;
+    width: 30vw;
+    color: black;
+    height: min-content;
+    left: 10px;
+    bottom: 10px;
+}
+
+.message{
+    width: 100%;
+    height: 20px;
+    background: #6c6aab;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

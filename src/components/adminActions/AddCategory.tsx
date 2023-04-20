@@ -1,23 +1,40 @@
 import React from 'react'
-import { useAddCategoryMutation, useAddManufacturerMutation } from '../../store/Slices/productApi'
+import { useAddCategoryMutation } from '../../store/Slices/productApi'
+import { useShowAlert } from '../../hooks/useShowAlert'
 
-export const AddCategory = () => {
-    const [name, setName] = React.useState<string>()
+export const AddCategory = (props: any) => {
+  const [name, setName] = React.useState<string>('')
 
-    const [addCat] = useAddCategoryMutation()
+  const [addCat] = useAddCategoryMutation()
+  const ref = React.useRef<HTMLUListElement>();
 
-    const onSubmit = () => {
-        if (name) {
-            const data = addCat(name)
-        }
+  const alert = useShowAlert()
+
+  const onSubmit = () => {
+    if (name) {
+      addCat(name).then((data) => alert(data))
     }
+  }
+
+  const handleRef = () => {
+    if (ref) {
+      if (ref.current) {
+        if (ref.current.style.display === 'block') {
+          ref.current.style.display = 'none'
+        } else {
+          ref.current.style.display = 'block'
+        }
+
+      }
+    }
+  }
 
   return (
-    <div style={{height: 'minContent'}}>
-    <div style={{height: '20px'}}>
-        <input className='input1' type="text" placeholder='Введите название производителя' onChange={(e) => setName(e.target?.value)} value={name} />
+    <div style={{ height: 'minContent' }}>
+      <div style={{ height: '20px' }}>
+        <input className='input1' onClick={handleRef} type="text" placeholder='Введите название производителя' onChange={(e) => setName(e.target?.value)} value={name} />
+      </div>
+      <button className='btn1' onClick={onSubmit}>Отправить</button>
     </div>
-    <button onClick={onSubmit}>Отправить</button>
-</div>
   )
 }
