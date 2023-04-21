@@ -22,7 +22,7 @@ export const Product: React.FC<Props> = ({ product }) => {
     return (
         <div className="row">
             <div className="el-wrapper">
-                <div className="box-up">
+                <div onClick={() => navigate(`/product/${product.id}`)} className="box-up">
                     <img onClick={() => navigate(`/product/${product.id}`)} className="img" src={product.image} alt="" />
                     <div className="img-info">
                         <div className="info-inner">
@@ -41,7 +41,7 @@ export const Product: React.FC<Props> = ({ product }) => {
                     <a className="cart" href="#">
                         <span className="price">{product.sale}</span>
                         <span onClick={addHandleBusket} className="add-to-cart">
-                            <span className="txt">Add in cart</span>
+                            <span className="txt">To busket</span>
                         </span>
                     </a>
                 </div>

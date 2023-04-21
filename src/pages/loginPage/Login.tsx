@@ -60,6 +60,7 @@ export const Login = () => {
           <input type='password' {...register('repeatPassword', { required: 'repeatPassword is require' })} placeholder="Repeat password" />
           <button type="submit">Submit </button> <span>{error ?? error}</span>
           <div><p>Если вы не  зарегестрированы, <Link to={'/register'}>зарегестрируйтесь</Link> </p></div>
+          <div>Если вы хотите зайти от админа то логин: LiiChar, пароль: qwe</div>
         </form>
       </div>
 

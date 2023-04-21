@@ -13,6 +13,8 @@ export const AddProduct = (props: any) => {
     const ref1 = React.useRef<HTMLUListElement>();
     const ref2 = React.useRef<HTMLUListElement>();
 
+    
+
     const [createProduct] = useCreateProductMutation()
 
     const onSubmit = () => {
@@ -23,7 +25,7 @@ export const AddProduct = (props: any) => {
             }
         }
         if (name && sale && description && company && category) {
-
+            
             data.append('name', name);
             data.append('sale', sale);
             data.append('description', description);
@@ -43,7 +45,7 @@ export const AddProduct = (props: any) => {
     
     const filterMam = props?.manufacturer?.filter((manufact: string) => manufact[0]?.toLocaleLowerCase()?.includes(company))
     const filterCat = props?.categories?.filter((category: string) => category[0]?.toLocaleLowerCase()?.includes(category))
-
+    
     const handleRef = (num: number) => {
         if (num === 1) {
             if (ref1) {

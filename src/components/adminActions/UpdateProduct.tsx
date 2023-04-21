@@ -24,9 +24,13 @@ export const UpdateProduct = (props: any) => {
     const onSubmit = () => {
         const data = new FormData();
         if (image) {
+            console.log(image);
+            
             for (let i = 0; i < image?.length; i++) {
                 data.append("file[]", image[i]);
             }
+        } else {
+            data.append('file[]', '')
         }
         if (name && sale && description && company && category) {
 
@@ -91,7 +95,6 @@ export const UpdateProduct = (props: any) => {
     const selProd = async (name: any) => {
         if (filterProd.some((e: any) => e.id !== name.id)) {
             getById(name.id).then((data: any) => {
-                console.log(data);
                 setId(name.id);
                 setName(data.data.name)
                 setSale(data.data.sale)
@@ -100,10 +103,6 @@ export const UpdateProduct = (props: any) => {
                 setCategory(data.data.categories)
                 setIsFind(true)
             })
-
-
-
-
 
         }
     }
@@ -129,7 +128,7 @@ export const UpdateProduct = (props: any) => {
                         <input className='input1' type="text" onClick={() => handleRef(2)} placeholder='Выберите категорию' onChange={(e) => setCategory(e.target.value)} value={category} />
                     </div>
                     {filterCat && <TopDownList setRef={ref2} list={filterCat} selectElem={(name: string) => setCompany(name)} />}
-                    <div style={{ height: '30px' }}>
+                    <div  style={{ height: '30px', display: 'none' }}>
                         <input className='input1' type="file" placeholder='Выберите файл' onChange={(e) => setImage(e.target.files)} />
                     </div>
                     <button className='btn1' onClick={onSubmit}>Отправить</button>

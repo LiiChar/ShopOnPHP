@@ -1,6 +1,6 @@
 import React from 'react'
-import { useAddManufacturerMutation } from '../../store/Slices/productApi'
 import { useShowAlert } from '../../hooks/useShowAlert'
+import { useAddManufacturerMutation } from '../../store/Slices/manufacturerApi'
 
 export const AddManufacturer = (props: any) => {
     const [name, setName] = React.useState<string>('')

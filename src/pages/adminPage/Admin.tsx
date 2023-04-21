@@ -8,11 +8,13 @@ import { DeleteUser } from '../../components/adminActions/DeleteUser'
 import { AddManufacturer } from '../../components/adminActions/AddManufacturer'
 import { UpdateProduct } from '../../components/adminActions/UpdateProduct'
 import { useFetchAllUsersQuery } from '../../store/Slices/userApi'
-import { useFetchAllProductsQuery, useFetchCategoryQuery, useFetchManufacturersQuery } from '../../store/Slices/productApi'
+import { useFetchAllProductsQuery } from '../../store/Slices/productApi'
+import { useFetchManufacturersQuery } from '../../store/Slices/manufacturerApi'
+import { useFetchCategoryQuery } from '../../store/Slices/categoryApi'
 
 export const Admin = () => {
   const { data: users } = useFetchAllUsersQuery()
-  const {data:products} = useFetchAllProductsQuery()
+  const {data:products} = useFetchAllProductsQuery({page: 0, category: '', manufacturer: ''})
   const {data:manufacturer} = useFetchManufacturersQuery()
   const {data:categories} = useFetchCategoryQuery()
 
@@ -30,7 +32,7 @@ export const Admin = () => {
           <input id="pesontedan-two" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-two">Изменить продукт</label>
           <div className="pesontedan-content">
-            <UpdateProduct products={products} manufacturer={manufacturer} categories={categories}/>
+            <UpdateProduct products={products?.products} manufacturer={manufacturer} categories={categories}/>
           </div>
         </div>
         <div key={3} className="pesontedan">
@@ -51,7 +53,7 @@ export const Admin = () => {
           <input id="pesontedan-five" type="checkbox" name="pesontedans" />
           <label htmlFor="pesontedan-five">Удалить продукт</label>
           <div className="pesontedan-content">
-            <DeleteProduct products={products}/>
+            <DeleteProduct products={products?.products}/>
           </div>
         </div>
         <div key={6} className="pesontedan">

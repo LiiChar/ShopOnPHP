@@ -1,6 +1,6 @@
 import React from 'react'
-import { useAddCategoryMutation } from '../../store/Slices/productApi'
 import { useShowAlert } from '../../hooks/useShowAlert'
+import { useAddCategoryMutation } from '../../store/Slices/categoryApi'
 
 export const AddCategory = (props: any) => {
   const [name, setName] = React.useState<string>('')
@@ -12,7 +12,7 @@ export const AddCategory = (props: any) => {
 
   const onSubmit = () => {
     if (name) {
-      addCat(name).then((data) => alert(data))
+      addCat(name).then((data: any) => alert(data))
     }
   }
 

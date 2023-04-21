@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IProducts } from '../../types/types';
+import { GetIProducts } from '../../types/types';
 
 
 const baseUrl = 'http://localhost:80/'
@@ -7,11 +7,11 @@ const baseUrl = 'http://localhost:80/'
 export const productApi = createApi({
     reducerPath: 'productsApi',
     baseQuery: fetchBaseQuery({ baseUrl }),
-    tagTypes: ['products', 'manufacturer', 'category'],
+    tagTypes: ['products'],
     endpoints: (build) => ({
-        fetchAllProducts: build.query<IProducts[], void>({
-            query: () => ({
-                url: 'products/all'
+        fetchAllProducts: build.query<GetIProducts, any>({
+            query: (prod) => ({
+                url: `products/all?page=${prod.page}&cat=${prod.category}&man=${prod.manufacturer}`
             }),
             providesTags: result => ['products']
         }),
@@ -55,47 +55,7 @@ export const productApi = createApi({
                 method: 'DELETE',
             }),
             invalidatesTags: ['products']
-        }),
-        fetchManufacturers: build.query<any, void>({
-            query: () => ({
-                url: `products/manufacturer/all`
-            }),
-            providesTags: result => ['manufacturer']
-        }),
-        addManufacturer: build.mutation<any, string>({
-            query: (name) => ({
-                url: 'products/manufacturer/add',
-                method: 'POST',
-                body: { name }
-            }),
-            invalidatesTags: ['manufacturer']
-        }),
-        deleteManufacturer: build.mutation<any, any>({
-            query: (id) => ({
-                url: `products/manufacturer/delete?id=${id}`
-            }),
-            invalidatesTags: ['manufacturer']
-        }),
-        fetchCategory: build.query<any, void>({
-            query: () => ({
-                url: `products/category/all`
-            }),
-            providesTags: result => ['category']
-        }),
-        addCategory: build.mutation<any, string>({
-            query: (name) => ({
-                url: 'products/category/add',
-                method: 'POST',
-                body: { name }
-            }),
-            invalidatesTags: ['category']
-        }),
-        deleteCategory: build.mutation<any, number>({
-            query: (id) => ({
-                url: `products/category/delete${id}`
-            }),
-            invalidatesTags: ['category']
-        }),
+        })
     })
 })
 
@@ -106,13 +66,7 @@ export const {
     useGetProductByIdQuery,
     useGetProductByNameQuery,
     useUpdateProductMutation,
-    useAddManufacturerMutation,
-    useDeleteManufacturerMutation,
     useLazyFetchAllProductsQuery,
-    useFetchManufacturersQuery,
-    useAddCategoryMutation,
-    useDeleteCategoryMutation,
-    useFetchCategoryQuery,
     useGetProductIdMutation
 } = productApi
 

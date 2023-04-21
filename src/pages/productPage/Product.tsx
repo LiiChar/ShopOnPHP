@@ -4,14 +4,15 @@ import { useAddBusketMutation } from '../../store/Slices/busketApi'
 import { useGetProductByIdQuery } from '../../store/Slices/productApi'
 import { useParams } from 'react-router-dom'
 import { CommentsList } from '../../components/commets/CommentsList'
-import { useCreateCommentMutation, useCreateRateMutation, useGetRateByIdQuery, useUpdateRateMutation } from '../../store/Slices/commentApi'
+import { useCreateCommentMutation  } from '../../store/Slices/commentApi'
 import StarRatings from 'react-star-ratings';
 import { useShowAlert } from '../../hooks/useShowAlert'
+import { useCreateRateMutation, useGetRateByIdQuery, useUpdateRateMutation } from '../../store/Slices/rateApi'
 
 export const Product: React.FC = () => {
     const user_id = Number(sessionStorage.getItem('user_id'));
     const { id } = useParams()
-    const { data: product } = useGetProductByIdQuery(id)
+    const { data: product, refetch } = useGetProductByIdQuery(id)
     const [addBusket] = useAddBusketMutation()
     const [comment, setComment] = React.useState<string>('');
     const [addComment] = useCreateCommentMutation()
@@ -89,11 +90,16 @@ export const Product: React.FC = () => {
                                 starSpacing='5px'
                                 changeRating={(star: number) => {
                                     if (rate?.rate) {
-                                        updateRate({ prod_id: id, user_id, star }).then(() => {
+                                        updateRate({ prod_id: id, user_id, star }).then((data) => {
+                                            alert(data)
+                                            refetch();
                                             setStar(star)
                                         })
                                     } else {
-                                        createRate({ prod_id: id, user_id, star }).then(() => {
+                                        createRate({ prod_id: id, user_id, star }).then((data) => {
+                                            alert(data)
+                                            refetch();
+
                                             setStar(star)
                                         })
                                     }
